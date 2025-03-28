@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function connectToServer() {
     if (socket) socket.close();
-    socket = new WebSocket('wss://' + window.location.hostname);
-        setupSocketListeners();
+socket = new WebSocket('wss://battleship-websocket.onrender.com');
+    setupSocketListeners();
   }
 
   function createBoards() {
