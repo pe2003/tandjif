@@ -1,0 +1,295 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#game {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 1200px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+#playerBoard, #enemyBoard {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  width: 400px;
+  height: 400px;
+  border: px solid #333;
+  background-color: #fff;
+}
+
+.cell {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: #e0e0e0;
+  transition: background-color 0.7s;
+}
+
+.cell.ship {
+  background-color: #666;
+}
+
+.cell.hit {
+  background-color: #ff4d4d;
+  position: relative;
+}
+
+.cell.hit::after {
+  content: 'X';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: clamp(1em, 3vw, 2em);
+  font-weight: bold;
+}
+
+.cell.miss {
+  background-color: #ffff99;
+  cursor: default;
+}
+
+.cell.dead-zone {
+  background-color: #ffff99 !important;
+  cursor: default;
+}
+
+#stats {
+  margin: 20px 0;
+  text-align: center;
+  font-size: 1.2em;
+  color: #333;
+}
+
+#stats p {
+  margin: 5px 0;
+}
+
+#status {
+  font-size: 1.5em;
+  margin: 10px 0;
+  color: #555;
+}
+
+#shipStatus {
+  font-size: 1.2em;
+  margin: 10px 0;
+  text-align: center;
+  color: #333;
+}
+
+#result {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin: 15px 0;
+  text-align: center;
+  color: #333;
+}
+
+#result.win {
+  color: #4CAF50;
+}
+
+#result.lose {
+  color: #ff4d4d;
+}
+
+#restartButton {
+  display: none;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+#restartButton:hover {
+  background-color: #45a049;
+}
+
+@media (max-width: 900px) {
+  #playerBoard, #enemyBoard {
+    width: 300px;
+    height: 300px;
+  }
+
+  .cell {
+    width: 30px;
+    height: 30px;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  #stats {
+    font-size: 1em;
+  }
+
+  #status {
+    font-size: 1.2em;
+  }
+
+  #shipStatus {
+    font-size: 1em;
+  }
+
+  #result {
+    font-size: 1.5em;
+  }
+}
+
+@media (max-width: 600px) {
+  #playerBoard, #enemyBoard {
+    width: 250px;
+    height: 250px;
+  }
+
+  .cell {
+    width: 25px;
+    height: 25px;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+
+  #stats {
+    font-size: 0.9em;
+  }
+
+  #status {
+    font-size: 1em;
+  }
+
+  #shipStatus {
+    font-size: 0.9em;
+  }
+
+  #result {
+    font-size: 1.2em;
+  }
+}
+/* ... (предыдущий CSS остаётся без изменений) */
+
+#playWithComputerButton {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+#playWithComputerButton:hover {
+  background-color: #1976D2;
+}
+
+select {
+  padding: 10px;
+  font-size: 1.2em;
+  margin-top: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+  border: 1px solid #333;
+  cursor: pointer;
+}
+
+#s#shipStatus {
+  font-size: 1.2em;
+  margin: 10px 0;
+  color: #333;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.ship-status-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.ship-status-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Выравнивание по левому краю */
+  min-width: 200px;
+}
+
+.ship-status-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.ship-row {
+  display: flex;
+  justify-content: flex-start; /* Выравнивание по левому краю */
+  margin: 5px 0;
+}
+
+.ship-square {
+  width: 20px;
+  height: 20px;
+  background-color: #666; /* Цвет корабля, как на поле */
+  margin: 2px;
+  display: inline-block;
+}
+
+@media (max-width: 900px) {
+  .ship-square {
+    width: 15px;
+    height: 15px;
+  }
+
+  .ship-status-column {
+    min-width: 150px;
+  }
+}
+
+@media (max-width: 600px) {
+  .ship-square {
+    width: 12px;
+    height: 12px;
+  }
+
+  .ship-status-column {
+    min-width: 120px;
+  }
+}
